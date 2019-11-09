@@ -11,9 +11,11 @@ import com.formacionbdi.springboot.app.item.clientes.ProductoClienteRest;
 import com.formacionbdi.springboot.app.item.models.Item;
 
 @Service
+@Primary
 public class ItemServiceImplFeign implements ItemService {
 
 	private static final int NUM_ARTICULOS = 2;
+	
 	@Autowired
 	private ProductoClienteRest clienteFeign;
 	
