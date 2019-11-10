@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,9 @@ public class ProductoController {
 	@Autowired
 	private Environment env; 
 	
+	@Value("${server.port}")
+	private Integer port;
+	
 	@Autowired
 	private ProductoService productoService;
 	
@@ -26,8 +30,7 @@ public class ProductoController {
 		return productoService.findAll()
 				.stream()
 				.map(producto -> {
-					String localServerPort = env.getProperty("local.server.port");
-					producto.setPort(Integer.parseInt(localServerPort));
+					producto.setPort(port);
 					return producto;
 				})
 				.collect(Collectors.toList());
@@ -35,10 +38,8 @@ public class ProductoController {
 	
 	@GetMapping("/ver/{id}")
 	public Producto listar(@PathVariable Long id) {
-		String localServerPort = env.getProperty("local.server.port");
-		
 		Producto producto = productoService.findById(id);
-		producto.setPort(Integer.parseInt(localServerPort));
+		producto.setPort(port);
 		return producto;
 	}
 	
