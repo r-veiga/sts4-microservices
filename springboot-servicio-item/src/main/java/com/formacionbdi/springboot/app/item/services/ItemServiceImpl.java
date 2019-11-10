@@ -15,7 +15,6 @@ import com.formacionbdi.springboot.app.item.models.Item;
 import com.formacionbdi.springboot.app.item.models.Producto;
 
 @Service
-@Primary
 public class ItemServiceImpl implements ItemService {
 
 	private final static int NUM_UNIDADES = 2;
