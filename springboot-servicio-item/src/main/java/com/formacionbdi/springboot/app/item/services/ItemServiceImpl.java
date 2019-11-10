@@ -14,7 +14,7 @@ import org.springframework.web.client.RestTemplate;
 import com.formacionbdi.springboot.app.item.models.Item;
 import com.formacionbdi.springboot.app.item.models.Producto;
 
-@Service
+@Service("serviceRestTemplate")
 public class ItemServiceImpl implements ItemService {
 
 	private final static int NUM_UNIDADES = 2;
@@ -27,7 +27,7 @@ public class ItemServiceImpl implements ItemService {
 		productos = Arrays.asList(
 						clienteRest
 							.getForObject(	
-								"http://localhost:17017/listar", 
+								"http://servicio-productos/listar", 
 								Producto[].class
 							)
 						); 
@@ -43,7 +43,7 @@ public class ItemServiceImpl implements ItemService {
 		pathVariables.put("id", id.toString());
 		Producto producto = clienteRest
 								.getForObject(
-									"http://localhost:17017/ver/{id}", 
+									"http://servicio-productos/ver/{id}", 
 									Producto.class, 
 									pathVariables
 								);
